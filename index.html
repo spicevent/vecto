@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<meta charset="UTF-8">
+	<title>Vecto | Spicevent</title>
+	<style>
+		* {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			font: 400 1em/1.5 sans-serif;
+		}
+
+		strong {
+			font-weight: bold;
+		}
+
+		html,
+		body {
+			background-color: #eee;
+			color: #444;
+			display: inline-block;
+			font: 400 1em/1.5 sans-serif;
+			height: 100vh;
+			max-height: 100vh;
+			margin: 0;
+			overflow: hidden;
+			padding: 0;
+			position: relative;
+			vertical-align: top;
+			width: 100%;
+		}
+
+		header {
+			align-content: center;
+			-ms-align-items: center;
+			align-items: center;
+			background-color: #00709f;
+			-webkit-box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.54);
+			box-shadow: 0 0.25em 0.5em rgba(0, 0, 0, 0.54);
+			color: #ffffff;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			height: 4rem;
+			justify-content: space-between;
+			padding: 0 1rem;
+			position: relative;
+			width: 100%;
+			z-index: 10;
+		}
+
+		header h1 {
+			font-size: 2rem;
+			font-weight: 700;
+			height: 4rem;
+			line-height: 4rem;
+			margin: 0;
+		}
+
+		header h1 small {
+			font-size: 2rem;
+			font-weight: 500;
+		}
+
+		header .export {
+			align-content: center;
+			-ms-align-items: center;
+			align-items: center;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			justify-content: flex-end;
+		}
+
+		header nav {
+			position: absolute;
+			right: 1rem;
+			top: 0;
+		}
+
+		header nav ul {
+			list-style-type: none;
+			margin: 0;
+			padding: 0;
+		}
+
+		header nav ul li {
+			display: inline-block;
+			vertical-align: baseline;
+		}
+
+		header nav ul li a {
+			color: #ffffff;
+			display: inline-block;
+			height: 100%;
+			font-weight: 500;
+			line-height: 4rem;
+			padding: 0 1rem;
+			text-transform: uppercase;
+			text-decoration: none;
+			width: 100%;
+		}
+
+		header button {
+			align-content: center;
+			-ms-align-items: center;
+			align-items: center;
+			background-color: #95e12b;
+			border: none;
+			-webkit-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+			box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.5);
+			color: #000;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			justify-content: center;
+		}
+
+		h2 {
+			font-size: 1.5rem;
+			font-weight: 600;
+			margin: 0 0 1rem;
+		}
+
+		label,
+		button {
+			cursor: pointer;
+			font-size: 0.875rem;
+			font-weight: 600;
+			letter-spacing: 1px;
+			text-transform: uppercase;
+		}
+
+		label {
+			margin-right: 0.5rem;
+		}
+
+		button {
+			background-color: transparent;
+			border: 1px solid #ccc;
+			border-radius: 0.5rem;
+			color: #888;
+			padding: 0.5rem 1rem;
+		}
+
+		.form-field {
+			align-content: center;
+			-ms-align-items: center;
+			align-items: center;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			margin-right: 0.5rem;
+		}
+
+		input,
+		select {
+			align-content: center;
+			-ms-align-items: center;
+			align-items: center;
+			background-color: #fff;
+			border: 0;
+			border-radius: 0.5rem;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			height: 2rem;
+			justify-content: flex-start;
+			line-height: 2rem;
+			padding: 0.25rem 0.5rem;
+		}
+
+		input {
+			width: 6rem;
+		}
+
+		select {
+			cursor: pointer;
+		}
+
+		input[type="color"] {
+			background-color: #fff;
+			border: 1px solid #ccc;
+			display: inline-block;
+			cursor: pointer;
+			min-width: 0;
+			padding: 0.25rem;
+			vertical-align: middle;
+		}
+
+		details summary {
+			cursor: pointer;
+			font-weight: bold;
+		}
+
+		details {
+			background-color: #fff;
+			border-radius: 0.5rem;
+			margin-bottom: 0.5rem;
+			padding: 0.5rem;
+		}
+
+		.form p {
+			display: inline-block;
+			margin-bottom: 1rem;
+			width: 100%;
+		}
+
+		.generator {
+			background-color: #eee;
+			bottom: 0;
+			left: 25%;
+			position: absolute;
+			right: 20%;
+			top: 4rem;
+			z-index: 0;
+		}
+
+		.preview {
+			height: 100%;
+			padding: 1rem;
+			width: 100%;
+		}
+
+		.palette {
+			bottom: 0;
+			overflow-y: scroll;
+			padding: 1rem;
+			position: absolute;
+			right: 0;
+			top: 4rem;
+			width: 20%;
+		}
+
+		.library {
+			background-color: #fff;
+			bottom: 0;
+			left: 0;
+			letter-spacing: normal;
+			overflow-y: scroll;
+			padding: 1rem;
+			position: absolute;
+			top: 4rem;
+			width: 25%;
+		}
+
+		.library ul {
+			align-content: stretch;
+			-ms-align-items: stretch;
+			align-items: stretch;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			-webkit-flex-wrap: wrap;
+			-moz-flex-wrap: wrap;
+			-ms-flex-wrap: wrap;
+			-o-flex-wrap: wrap;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			left: -0.5rem;
+			margin: 0;
+			padding: 0;
+			position: relative;
+			width: calc(100% + 1rem)	;
+		}
+
+		.library li {
+			display: block;
+			margin: 0 0.5rem 1rem;
+			padding: 0;
+			width: calc(50% - 1rem);
+		}
+
+		.library li button {
+			align-content: stretch;
+			-ms-align-items: stretch;
+			align-items: stretch;
+			background-color: #eee;
+			border: 1px solid #ccc;
+			display: -webkit-flex;
+			display: -moz-flex;
+			display: -ms-flex;
+			display: -o-flex;
+			display: flex;
+			-webkit-flex-direction: column;
+			-moz-flex-direction: column;
+			-ms-flex-direction: column;
+			-o-flex-direction: column;
+			flex-direction: column;
+			height: 100%;
+			justify-content: flex-start;
+			padding: 0.5rem;
+			position: relative;
+			width: 100%;
+		}
+
+		.library li button .image-wrapper {
+			-webkit-box-sizing: border-box;
+			-moz-box-sizing: border-box;
+			box-sizing: border-box;
+			display: inline-block;
+			margin-bottom: 1rem;
+			padding: 1rem;
+			width: 100%;
+		}
+
+		.library li button .image {
+			height: 0;
+			padding-top: 100%;
+		}
+
+		.library li .name {
+			display: inline-block;
+			overflow: hidden;
+			text-align: center;
+			word-break: break-word;
+			width: 100%;
+		}
+
+		.damier {
+			background-color: white;
+			background-image: -webkit-linear-gradient(bottom left, #eee 25%, transparent 25%, transparent 75%, #eee 75%), -webkit-linear-gradient(bottom left, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+			background-image: -o-linear-gradient(bottom left, #eee 25%, transparent 25%, transparent 75%, #eee 75%), -o-linear-gradient(bottom left, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+			background-image: linear-gradient(to top right, #eee 25%, transparent 25%, transparent 75%, #eee 75%), linear-gradient(to top right, #eee 25%, transparent 25%, transparent 75%, #eee 75%);
+			background-size: 16px 16px;
+			background-position: 0 0, 8px 8px;
+		}
+
+		.image {
+			-webkit-background-size: contain;
+			background-size: contain;
+			background-position: center center;
+			background-repeat: no-repeat;
+			display: inline-block;
+			height: 100%;
+			width: 100%;
+		}
+
+		.image svg {
+			height: 100%;
+			width: 100%;
+		}
+
+		.colorable {
+			background-color: #ff4422;
+			border-radius: 0.5rem;
+			-webkit-box-shadow: calc(0.5rem + 2px) 0 0 #ffcc44, 0 calc(0.5rem + 2px) 0 #22dd22, calc(0.5rem + 2px) calc(0.5rem + 2px) 0 #2266dd;
+			box-shadow: calc(0.5rem + 2px) 0 0 #ffcc44, 0 calc(0.5rem + 2px) 0 #22dd22, calc(0.5rem + 2px) calc(0.5rem + 2px) 0 #2266dd;
+			display: inline-block;
+			height: 0.5rem;
+			position: absolute;
+			right: 1.5rem;
+			top: 1rem;
+			width: 0.5rem;
+		}
+
+		.swatches {
+			display: inline-block;
+			vertical-align: top;
+		}
+
+		.swatch {
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			cursor: pointer;
+			float: left;
+			height: 1.5rem;
+			margin: 0 0.25rem 0.25rem 0;
+			padding: 0;
+			width: 1.5rem;
+		}
+	</style>
+</head>
+<body>
+	<main>
+		<header>
+			<h1>
+				Vecto
+				<small>v4.3</small>
+			</h1>
+			<div class="export">
+				<div class="form-field">
+					<label for="format">Format</label>
+					<select name="format" v-model="format">
+						<option v-for="f in formats" :value="f" v-text="f.label"></option>
+					</select>
+				</div>
+				<div class="form-field" v-if="format" v-show="!format.vecto">
+					<label for="width">Largeur</label>
+					<input type="number" min="1" id="width" name="width" v-model="width">
+				</div>
+				<div class="form-field" v-if="format" v-show="format.background">
+					<label for="background">Couleur de fond</label>
+					<input type="color" id="background" name="background" v-model="background">
+				</div>
+				<button type="button" @click="download" v-if="current">Télécharger</button>
+			</div>
+		</header>
+		<aside class="library">
+			<h2>Library</h2>
+			<ul>
+				<li v-for="(s, index) in svg">
+					<button type="button" :title="s" @click="updateSVG(s)">
+						<div class="image-wrapper damier">
+							<div class="image" :style="{'background-image': 'url(svg/' + s + '.svg)'}"></div>
+						</div>
+						<span class="name" v-text="s"></span>
+					</button>
+				</li>
+			</ul>
+		</aside>
+		<section class="generator">
+			<div class="preview damier">
+				<div class="image" v-html="contents"></div>
+			</div>
+		</section>
+		<section class="palette" v-if="variables.length">
+			<h2>Settings</h2>
+			<details v-for="(variable, v) in variables">
+				<summary v-text="variable.name"></summary>
+				<div class="color-wrapper">
+					<div class="swatches">
+						<div v-for="(palette, p) in palettes" style="clear: both">
+							<strong v-text="palette.name"></strong><br>
+							<button
+								v-for="(color, c) in palette.colors"
+								class="swatch"
+								type="button"
+								:title="color.name"
+								:style="{'background-color': color.code, 'clear': c % palette.width === 0 ? 'both' : undefined}"
+								:data-color="color.code"
+								@click="variable.value = color.code;"></button>
+						</div>
+					</div>
+					<div>
+						<strong>Couleur personnalisée</strong><br>
+						<input type="color" id="color" name="color" v-model="variable.value">
+					</div>
+				</div>
+			</details>
+		</section>
+	</main>
+
+	<script src="//unpkg.com/vue"></script>
+	<script>
+		new Vue({
+			el: 'main',
+			watch: {
+				variables: {
+					handler() {
+						this.variables.forEach(variable => {
+							document.querySelector('.image svg').style.setProperty('--' + variable.name, variable.value)
+						});
+					},
+					deep: true
+				}
+			},	
+			data: {
+				current: '',
+				contents: '',
+				formats: [
+					{ext: 'png', mime: 'image/png', label: 'PNG (fond transparent)', vecto: false, background: false, source: false},
+					{ext: 'jpg', mime: 'image/jpeg', label: 'JPEG (fond opaque)', vecto: false, background: true, source: false},
+					{ext: 'webp', mime: 'image/webp', label: 'WEBP (fond transparent)', vecto: false, background: false, source: false},
+					{ext: 'svg', mime: 'image/svg+xml', label: 'SVG (généré, vectoriel)', vecto: true, background: false, source: false},
+					{ext: 'svg', mime: 'image/svg+xml', label: 'SVG (source, vectoriel)', vecto: true, background: false, source: true}
+				],
+				format: null,
+				background: '#ffffff',
+				width: 500,
+				variables: [],
+				palettes: [],
+				svg: []
+			},
+			methods: {
+				updateSVG(file) {
+					this.current = file;
+					fetch('svg/' + file + '.svg')
+					.then(r => r.text())
+					.then(r => {
+						this.contents = r.replace(/\<\?xml.+\?\>|\<\!DOCTYPE.+]\>/g, '');
+						this.$forceUpdate();
+						this.$nextTick(() => {
+							var svg = document.querySelector('.image svg');
+							// fix
+							if (svg.getAttribute('viewBox') === null) {
+								svg.setAttribute('viewBox', '0 0 ' + svg.getAttribute('width') + ' ' + svg.getAttribute('height'));
+							}
+							// variables
+							this.variables = (this.contents.match(/var\(\s*--[^)]+\s*\)/gi) || []).map(declaration => {
+								return {
+									name: (/var\(\s*--([0-9a-zA-Z_-]+)[^)]*\)/.exec(declaration))[1],
+									value: (declaration.match(/var\([^,]*,\s*([^)]+)\)/) || [null, '#000000'])[1]
+								};
+							}).reduce((acc, cur) => {
+								if (acc.findIndex(i => i.name === cur.name) < 0) {
+									acc.push(cur);
+								}
+								return acc;
+							}, []);
+							// go to top
+							window.scrollTo(0, 0);
+						});
+					});
+				},
+				download() {
+					var svg = document.querySelector('.image svg');
+					var originalWidth = svg.getAttribute('width');
+					var originalHeight = svg.getAttribute('height');
+					var width = this.width;
+					var height = width * originalHeight / originalWidth;
+					svg.setAttribute('width', width);
+					svg.setAttribute('height', height);
+					var svgData = new XMLSerializer().serializeToString(svg);
+					(new Promise((resolve, reject) => {
+						if (this.format.ext === 'svg') {
+							if (!this.format.source) {
+								this.variables.forEach(variable => {
+									let pattern = new RegExp(`var\\(\\s*--${variable.name}[^)]*\\)`);
+									svgData = svgData.split(pattern).join(variable.value);
+								});
+							}
+							resolve('data:image/svg+xml;base64,' + btoa(svgData));
+						} else {
+							var canvas = document.createElement('canvas');
+							canvas.width = width;
+							canvas.height = height;
+							var ctx = canvas.getContext('2d');
+							var img = document.createElement('img');
+							img.setAttribute('src', 'data:image/svg+xml;base64,' + btoa(svgData));
+							img.onload = () => {
+								if (this.format.ext === 'jpg') {
+									ctx.fillStyle = this.background;
+									ctx.fillRect(0, 0, canvas.width, canvas.height);
+								}
+								ctx.drawImage(img, 0, 0);
+								resolve(canvas.toDataURL(this.format.mime, 1.0));
+							}
+						}
+					})).then(href => {
+						var a = document.createElement('a');
+						a.href = href;
+						a.download = this.current + '.' + this.format.ext;
+						a.click();
+					});
+				}
+			},
+			mounted() {
+				fetch('vecto.json')
+				.then(r => r.json())
+				.then(r => {
+					this.palettes = r.palettes;
+					this.svg = r.svg;
+					this.format = this.formats[0];
+					this.$forceUpdate();
+				});
+			}
+		});
+	</script>
+</body>
+</html>
