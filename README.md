@@ -4,6 +4,8 @@ A small but efficient tool to generate custom SVG, WEBP, PNG and JPG from SVG so
 
 This tool uses Vue.js (version 2) from [unpkg.com](https://unpkg.com/vue).
 
+[Demo here](https://intranet.spicevent.com/services/vecto/)
+
 ## Installation
 
 Just clone this repository in a folder :)
